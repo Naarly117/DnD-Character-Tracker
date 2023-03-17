@@ -414,9 +414,9 @@ public class Main {
 			case "log":
 				// Display contents of log file in terminal
 				try {
-					File inFile = new File("src\\main\\java\\org\\example\\"
-										   + myCharacter.getName().toLowerCase().replaceAll("\\s", "") + "/" 
-										   + myCharacter.getName().toLowerCase().replaceAll("\\s", "") + "_log.txt");
+					File inFile = new File("src\\main\\java\\org\\DnDCharacterTracker\\"
+										   + FormatHandler.normalize(myCharacter.getName()) + "\\"
+										   + FormatHandler.normalize(myCharacter.getName()) + "_log.txt");
 					Scanner logScan = new Scanner(inFile);
 					while (logScan.hasNextLine()) {
 						FormatHandler.printWithFormat(logScan.nextLine(), 100, 0);
@@ -472,9 +472,9 @@ public class Main {
 				// Prompt user for new log entry
 				System.out.print("New log entry: ");
 				// Define location of log file
-				File log = new File("src\\main\\java\\org\\example\\"
-									+ myCharacter.getName().toLowerCase().replaceAll("\\s", "") + "/" 
-									+ myCharacter.getName().toLowerCase().replaceAll("\\s", "") + "_log.txt");
+				File log = new File("src\\main\\java\\org\\DnDCharacterTracker\\"
+									+ FormatHandler.normalize(myCharacter.getName()) + "\\"
+									+ FormatHandler.normalize(myCharacter.getName()) + "_log.txt");
 				try {
 					// Create new log file only if one does not already exist
 					if (!log.exists()) {
