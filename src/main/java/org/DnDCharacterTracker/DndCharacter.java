@@ -78,7 +78,7 @@ public class DndCharacter {
 		// Read in the list of Skills from a text file and store them with the Character
 		skills = new ArrayList<String>();
 		try {
-			Scanner sc = new Scanner(new File("src\\main\\java\\org\\example\\skills.txt"));
+			Scanner sc = new Scanner(new File("src\\main\\java\\org\\DnDCharacterTracker\\skills.txt"));
 			while (sc.hasNextLine()) {
 				skills.add(sc.nextLine());
 			}

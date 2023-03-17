@@ -136,13 +136,13 @@ public class Main {
 	// Function: Calculate the modifier for a stat
 	// Parameter: stat - value of stat to calculate a modifier for
 	// Returns: mod - value of the modifier for stat
-	public static int calculateModifier(int stat) {
+	/*public static int calculateModifier(int stat) {
 		if (stat > 9) {
 			return (stat-10)/2;
 		} else {
 			return (stat-11)/2;
 		}
-	}
+	}*/
 	
 	// Function: Executes a command based on user input
 	// Parameters: s - String name of command to be executed
@@ -598,7 +598,7 @@ public class Main {
 					switch (temp[temp.length - 1].toLowerCase()) {
 						case "str" -> {
 							// Add the Strength stat's modifier to y
-							y += calculateModifier(myCharacter.getStrength());
+							y += MathHandler.calculateModifier(myCharacter.getStrength());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("strength") ||
 									myCharacter.getProficiencies().contains(s.toLowerCase())) {
@@ -608,7 +608,7 @@ public class Main {
 						}
 						case "dex" -> {
 							// Add the Dexterity stat's modifier to y
-							y += calculateModifier(myCharacter.getDexterity());
+							y += MathHandler.calculateModifier(myCharacter.getDexterity());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("dexterity") ||
 									myCharacter.getProficiencies().contains(s.toLowerCase())) {
@@ -618,7 +618,7 @@ public class Main {
 						}
 						case "int" -> {
 							// Add the Intelligence stat's modifier to y
-							y += calculateModifier(myCharacter.getIntelligence());
+							y += MathHandler.calculateModifier(myCharacter.getIntelligence());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("intelligence") ||
 									myCharacter.getProficiencies().contains(s.toLowerCase())) {
@@ -628,7 +628,7 @@ public class Main {
 						}
 						case "wis" -> {
 							// Add the Wisdom stat's modifier to y
-							y += calculateModifier(myCharacter.getWisdom());
+							y += MathHandler.calculateModifier(myCharacter.getWisdom());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("wisdom") ||
 									myCharacter.getProficiencies().contains(s.toLowerCase())) {
@@ -638,7 +638,7 @@ public class Main {
 						}
 						case "cha" -> {
 							// Add the Charisma stat's modifier to y
-							y += calculateModifier(myCharacter.getCharisma());
+							y += MathHandler.calculateModifier(myCharacter.getCharisma());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("charisma") ||
 									myCharacter.getProficiencies().contains(s.toLowerCase())) {
@@ -717,40 +717,40 @@ public class Main {
 			case "stats":
 				// Display character's main stats
 				System.out.print("Strength: " + myCharacter.getStrength() + " (");
-				if (calculateModifier(myCharacter.getStrength()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getStrength()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getStrength()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getStrength()) + ")");
 				
 				System.out.print("Dexterity: " + myCharacter.getDexterity() + " (");
-				if (calculateModifier(myCharacter.getDexterity()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getDexterity()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getDexterity()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getDexterity()) + ")");
 				
 				System.out.print("Constitution: " + myCharacter.getConstitution() + " (");
-				if (calculateModifier(myCharacter.getConstitution()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getConstitution()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getConstitution()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getConstitution()) + ")");
 				
 				System.out.print("Intelligence: " + myCharacter.getIntelligence() + " (");
-				if (calculateModifier(myCharacter.getIntelligence()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getIntelligence()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getIntelligence()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getIntelligence()) + ")");
 				
 				System.out.print("Wisdom: " + myCharacter.getWisdom() + " (");
-				if (calculateModifier(myCharacter.getWisdom()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getWisdom()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getWisdom()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getWisdom()) + ")");
 				
 				System.out.print("Charisma: " + myCharacter.getCharisma() + " (");
-				if (calculateModifier(myCharacter.getCharisma()) > -1) {
+				if (MathHandler.calculateModifier(myCharacter.getCharisma()) > -1) {
 					System.out.print("+");
 				}
-				System.out.println(calculateModifier(myCharacter.getCharisma()) + ")");
+				System.out.println(MathHandler.calculateModifier(myCharacter.getCharisma()) + ")");
 				
 				System.out.println("HP: " + myCharacter.getCurrentHitPoints() + 
 									"/" + myCharacter.getMaxHitPoints());
