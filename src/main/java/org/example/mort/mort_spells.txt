@@ -1,0 +1,11 @@
+name Fireball
+level 3
+castingtime Instant
+range 120ft
+target 30ft radius from point within range
+components n/a
+duration Instant
+concentration no
+description Big ol' ball of fire
+damage 8d6
+higherlevelcast 1d6 extra dmg per higher level of slot
