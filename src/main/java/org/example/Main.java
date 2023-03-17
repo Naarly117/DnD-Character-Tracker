@@ -35,10 +35,10 @@ public class Main {
 			input.nextLine();
 		
 			// Determine whether to create a new character or load an existing character
-			switch(s) {
-			
+			switch (s) {
+
 				// Create new character
-				case "c":
+				case "c" -> {
 					myCharacter = createNewCharacter();
 					// Prompt user to save character data if desired
 					System.out.print("Save character? [y/n] ");
@@ -59,10 +59,10 @@ public class Main {
 						// Discard this character
 						System.out.println("Character discarded.");
 					}
-					break;
-				
+				}
+
 				// Load character
-				case "l":
+				case "l" -> {
 					// Prompt user for name of character to be loaded
 					System.out.print("Enter name of character: ");
 					s = input.nextLine();
@@ -71,15 +71,13 @@ public class Main {
 					if (!myCharacter.getName().equals("")) {
 						System.out.println("\nCharacter loaded successfully!");
 					}
-					break;
-				default:
-					System.out.println("Unexpected Error Occurred (create/load)");
-					System.out.println("Press [esc] to exit");
+				}
+				default -> System.out.println("Unexpected error: initial create/load");
 			}
 		}
 		
 		// Whether character in use is brand new or loaded from file, at this point
-		// myCharacter has been created and contains all of the information for that character
+		// myCharacter has been created and contains all the information for that character
 		
 		// Now that the character has been loaded we can enter the main while() loop of the program
 		boolean inMainLoop = true;
@@ -107,13 +105,12 @@ public class Main {
 	public static DndCharacter createNewCharacter() {
 		
 		// Initialize Map to store character data
-		TreeMap<String, String> characterData = new TreeMap<String, String>();
+		TreeMap<String, String> characterData = new TreeMap<>();
 		
 		// Initialize new Scanner to read input
 		Scanner input = new Scanner(System.in);
 		
 		try {
-			System.out.println("CURRENT DIRECTORY: " + System.getProperty("user.dir"));
 			// Get list of properties to initialize new character from initialProperties.txt file
 			File inFile = new File("src\\main\\java\\org\\example\\initialProperties.txt");
 			Scanner myReader = new Scanner(inFile);
@@ -127,11 +124,11 @@ public class Main {
 			System.out.println("New character created!");
 			myReader.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("An unexpected error occurred (initial properties)");
+			System.out.println("Unexpected error: loading initial properties");
 			e.printStackTrace();
 		}
 		
-		// Create and return a new Character using all of the information that was just obtained
+		// Create and return a new Character using all the information that was just obtained
 		return new DndCharacter (characterData);
 		
 	}
@@ -219,7 +216,8 @@ public class Main {
 					}
 					System.out.println("Full character sheet file created");
 				} catch (Exception e) {
-					
+					System.out.println("Unexpected error: outputting character sheet");
+					e.printStackTrace();
 				}
 				break;
 			
@@ -341,13 +339,6 @@ public class Main {
 				// Display list of commands with descriptions
 				try {
 					File commands = new File("src\\main\\java\\org\\example\\commands.txt");
-
-					// TODO: Figure out why this code doesn't work and how to obtain absolute directory
-					/*
-					 Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
-					 System.out.println("Current absolute directory: " + path);
-					 */
-
 					Scanner c = new Scanner(commands);
 					System.out.println("List of Commands");
 					System.out.println("----------------");
@@ -355,7 +346,8 @@ public class Main {
 						System.out.println(c.nextLine());
 					}
 				} catch (FileNotFoundException e) {
-					System.out.println("Unexpected error (list of commands)");
+					System.out.println("Unexpected error: displaying list of commands");
+					e.printStackTrace();
 				}
 				break;
 				
@@ -498,7 +490,8 @@ public class Main {
 					logBufferedWriter.write(new java.util.Date() + ": " + input.nextLine() + "\n");
 					logBufferedWriter.close();
 				} catch (IOException e) {
-					System.out.println("Unexpected error occurred (writing to log)");
+					System.out.println("Unexpected error: writing to log");
+					e.printStackTrace();
 				}
 				break;
 				
@@ -582,9 +575,9 @@ public class Main {
 				break;
 				
 			case "skills":
-				// Display all of the Character's skill modifiers
+				// Display all the Character's skill modifiers
 				// Initialize variables
-				String[] temp = new String[0];
+				String[] temp;
 				int y = 0;
 				s = "";
 				boolean p = false;
@@ -603,62 +596,57 @@ public class Main {
 					System.out.print("): ");
 
 					// Calculate the modifier based on stat and proficiency and print it
-					switch(temp[temp.length-1].toLowerCase()) {
-						
-						case "str":
+					switch (temp[temp.length - 1].toLowerCase()) {
+						case "str" -> {
 							// Add the Strength stat's modifier to y
 							y += calculateModifier(myCharacter.getStrength());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("strength") ||
-								myCharacter.getProficiencies().contains(s.toLowerCase())) {
+									myCharacter.getProficiencies().contains(s.toLowerCase())) {
 								y += myCharacter.getProfBonus();
 								p = true;
 							}
-							break;
-							
-						case "dex":
+						}
+						case "dex" -> {
 							// Add the Dexterity stat's modifier to y
 							y += calculateModifier(myCharacter.getDexterity());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("dexterity") ||
-								myCharacter.getProficiencies().contains(s.toLowerCase())) {
+									myCharacter.getProficiencies().contains(s.toLowerCase())) {
 								y += myCharacter.getProfBonus();
-								p= true;
+								p = true;
 							}
-							break;
-							
-						case "int":
+						}
+						case "int" -> {
 							// Add the Intelligence stat's modifier to y
 							y += calculateModifier(myCharacter.getIntelligence());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("intelligence") ||
-								myCharacter.getProficiencies().contains(s.toLowerCase())) {
+									myCharacter.getProficiencies().contains(s.toLowerCase())) {
 								y += myCharacter.getProfBonus();
 								p = true;
 							}
-							break;
-							
-						case "wis":
+						}
+						case "wis" -> {
 							// Add the Wisdom stat's modifier to y
 							y += calculateModifier(myCharacter.getWisdom());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("wisdom") ||
-								myCharacter.getProficiencies().contains(s.toLowerCase())) {
+									myCharacter.getProficiencies().contains(s.toLowerCase())) {
 								y += myCharacter.getProfBonus();
 								p = true;
 							}
-							break;
-							
-						case "cha":
+						}
+						case "cha" -> {
 							// Add the Charisma stat's modifier to y
 							y += calculateModifier(myCharacter.getCharisma());
 							// Add the proficiency bonus to y if applicable
 							if (myCharacter.getProficiencies().contains("charisma") ||
-								myCharacter.getProficiencies().contains(s.toLowerCase())) {
+									myCharacter.getProficiencies().contains(s.toLowerCase())) {
 								y += myCharacter.getProfBonus();
 								p = true;
 							}
-							break;
+						}
 					}
 					// Print the value of y in a nice format
 					if (y > -1) {
@@ -697,7 +685,7 @@ public class Main {
 					System.out.println("Damage: " + sp.getDamage());
 					System.out.println("Higher level casting effects: " + sp.getHigherLevelCast());
 				} catch (NullPointerException e) {
-					System.out.println("Spell does not exist");
+					System.out.println(myCharacter.getName() + " does not have a spell by that name");
 				}
 				break;
 				
@@ -854,7 +842,7 @@ public class Main {
 						myCharacter.setSpellcastingAbility(input.nextLine());
 						break;
 					default:
-						System.out.println("An unexpected error occurred (updating basic info)");
+						System.out.println("Unexpected error: updating basic info");
 						break;
 				}
 				break;
@@ -923,9 +911,9 @@ public class Main {
 					try {
 						lv = Integer.parseInt(input.nextLine());
 					} catch (NumberFormatException e) {
-						
+						System.out.println("Error: Input must be a number between 1 and 9");
 					}
-					if (lv < 1 && lv > 9) {
+					if (lv < 1 || lv > 9) {
 						System.out.println("Error: Input must be a number between 1 and 9");
 						break;
 					}
@@ -936,8 +924,8 @@ public class Main {
 				// Ensure that new stat value is valid
 				try {
 					x = input.nextInt();
-				} catch (Exception e) {	
-				
+				} catch (Exception e) {
+					System.out.println("Error: input must be a positive number");
 				}		
 				input.nextLine();
 				while (x < 0) {
@@ -945,8 +933,8 @@ public class Main {
 					System.out.print("Enter new value for " + s + ": ");
 					try {
 						x = input.nextInt();
-					} catch (Exception e) { 
-					
+					} catch (Exception e) {
+						System.out.println("Error: Input must be a positive number");
 					}
 					input.nextLine();
 				}
@@ -1009,7 +997,7 @@ public class Main {
 						myCharacter.updateSpellSlotCount(lv, x);
 						break;
 					default:
-						System.out.println("Unexpected error occurred (update stats)");
+						System.out.println("Unexpected error occurred: updating stats");
 						break;
 				}
 				System.out.println(s + " updated successfully!");
@@ -1241,30 +1229,30 @@ public class Main {
 		}
 		
 		// Output Character stats and other basic info to file in dedicated directory
-		File outFile = new File(directoryName + "/" + charName + ".txt");
+		File outFile = new File(directoryName + "\\" + charName + ".txt");
 		try {
 			PrintStream ps = new PrintStream(outFile);	
 			ps.print(myCharacter.toString());
 			ps.close();
 		} catch (Exception e) {
-			System.out.println("An unexpected error occurred (saving character data)");
+			System.out.println("Unexpected error: saving character data");
 			e.printStackTrace();
 		}
 		
 		// Output Character's spell list to file in dedicated directory
-		outFile = new File(directoryName + "/" + charName + "_spells.txt");
+		outFile = new File(directoryName + "\\" + charName + "_spells.txt");
 		try {
 			PrintStream ps = new PrintStream(outFile);
 			for (String key : myCharacter.getSpellList().keySet()) {
 				ps.println(myCharacter.getSpellList().get(key));
 			}
 		} catch (Exception e) {
-			System.out.println("Unexpected error occurred (saving spell list)");
+			System.out.println("Unexpected error: saving spell list");
 			e.printStackTrace();
 		}
 		
 		// Output Character's inventory to file in dedicated directory
-		outFile = new File(directoryName + "/" + charName + "_inventory.txt");
+		outFile = new File(directoryName + "\\" + charName + "_inventory.txt");
 		try {
 			PrintStream ps = new PrintStream(outFile);
 			for (String key : myCharacter.getInventory().keySet()) {
@@ -1272,12 +1260,12 @@ public class Main {
 				ps.println(myCharacter.getInventory().get(key));
 			}
 		} catch (Exception e) {
-			System.out.println("Unexpected error occurred (saving inventory)");
+			System.out.println("Unexpected error: saving inventory");
 			e.printStackTrace();
 		}
 		
 		// Output Character's abilities to file in dedicated directory
-		outFile = new File(directoryName + "/" + charName + "_abilities.txt");
+		outFile = new File(directoryName + "\\" + charName + "_abilities.txt");
 		try {
 			PrintStream ps = new PrintStream(outFile);
 			for (String key : myCharacter.getAbilities().keySet()) {
@@ -1285,7 +1273,7 @@ public class Main {
 				ps.println(myCharacter.getAbilities().get(key));
 			}
 		} catch (Exception e) {
-			System.out.println("Unexpected error occurred (saving abilities)");
+			System.out.println("Unexpected error: saving abilities");
 			e.printStackTrace();
 		}
 		
@@ -1295,7 +1283,7 @@ public class Main {
 			PrintStream ps = new PrintStream(outFile);
 			ps.print(myCharacter.proficienciesToString());
 		} catch (Exception e) {
-			System.out.println("Unexpected error occurred (saving proficiencies)");
+			System.out.println("Unexpected error: saving proficiencies");
 			e.printStackTrace();
 		}
 	}
