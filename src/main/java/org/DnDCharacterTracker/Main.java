@@ -19,11 +19,11 @@ public class Main {
 		System.out.println("[L]oad existing character");
 		System.out.print("\nEnter command to proceed: ");
 		
-		String s = input.next().toLowerCase();
+		String s;
 		
 		// Ensure that a valid character is loaded
 		while (myCharacter.getName().equals("")) {
-		
+			s = input.next().toLowerCase();
 			// Ensure valid input to move to next section
 			while (!(s.equals("c") || s.equals("l"))) {
 				System.out.println("Invalid input\n");
@@ -66,6 +66,10 @@ public class Main {
 					myCharacter = LoadHandler.loadCharacter();
 					if (!myCharacter.getName().equals("")) {
 						System.out.println("\nCharacter loaded successfully!");
+					} else {
+						System.out.println("Enter [c] to create new character");
+						System.out.println("Enter [l] to load existing character");
+						System.out.print("\nEnter command to proceed: ");
 					}
 				}
 				default -> System.out.println("Unexpected error: initial create/load");
@@ -144,8 +148,7 @@ public class Main {
 	// Parameters: s - String name of command to be executed
 	//			   myCharacter - the Character that the command will be executed on
 	public static DndCharacter executeCommand(String s, DndCharacter myCharacter) {
-		
-		// Can delete this scanner after refactoring is complete
+
 		Scanner input = new Scanner(System.in);
 		
 		// Execute the specified command
@@ -334,7 +337,7 @@ public class Main {
 			case "help":
 				// Display list of commands with descriptions
 				try {
-					File commands = new File("src\\main\\java\\org\\example\\commands.txt");
+					File commands = new File("src\\main\\java\\org\\DnDCharacterTracker\\commands.txt");
 					Scanner c = new Scanner(commands);
 					System.out.println("List of Commands");
 					System.out.println("----------------");
@@ -1103,7 +1106,7 @@ public class Main {
 		}
 		
 		// Output Character's proficiencies to file in dedicated directory
-		outFile = new File(directoryName + "/" + charName + "_proficiencies.txt");
+		outFile = new File(directoryName + "\\" + charName + "_proficiencies.txt");
 		try {
 			PrintStream ps = new PrintStream(outFile);
 			ps.print(myCharacter.proficienciesToString());

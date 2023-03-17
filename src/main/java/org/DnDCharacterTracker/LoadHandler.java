@@ -26,11 +26,13 @@ public class LoadHandler {
     public static DndCharacter loadCharacter(String name) {
         // Create DndCharacter object and load initial character data into it
         DndCharacter myCharacter = loadCharacterInitialData(name);
-        // Update myCharacter to load spells, inventory, abilities, and proficiencies
-        myCharacter = loadSpells(myCharacter, name);
-        myCharacter = loadInventory(myCharacter, name);
-        myCharacter = loadAbilities(myCharacter, name);
-        myCharacter = loadProficiencies(myCharacter, name);
+        if (!myCharacter.getName().equals("")) {
+            // Update myCharacter to load spells, inventory, abilities, and proficiencies
+            myCharacter = loadSpells(myCharacter, name);
+            myCharacter = loadInventory(myCharacter, name);
+            myCharacter = loadAbilities(myCharacter, name);
+            myCharacter = loadProficiencies(myCharacter, name);
+        }
         return myCharacter;
     }
 
@@ -55,7 +57,7 @@ public class LoadHandler {
             }
             myCharacter = new DndCharacter(charData);
         } catch (FileNotFoundException e) {
-            System.out.println("Unexpected error: loading initial character data");
+            System.out.println("\nCharacter does not exist\n");
         }
         return myCharacter;
     }
