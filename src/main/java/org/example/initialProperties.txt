@@ -1,0 +1,37 @@
+Player Name
+Name
+Race
+Class
+Level
+Background
+Alignment
+Experience Points
+Strength
+Dexterity
+Constitution
+Intelligence
+Wisdom
+Charisma
+Passive Wisdom (Perception)
+Inspiration
+Proficiency Bonus
+Armor Class
+Initiative
+Speed
+Max Hit Points
+Personality Traits
+Ideals
+Bonds
+Flaws
+Spellcasting Ability
+Spell Save DC
+Spell Attack Bonus
+Lv1 Spell Slots
+Lv2 Spell Slots
+Lv3 Spell Slots
+Lv4 Spell Slots
+Lv5 Spell Slots
+Lv6 Spell Slots
+Lv7 Spell Slots
+Lv8 Spell Slots
+Lv9 Spell Slots

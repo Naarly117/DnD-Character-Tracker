@@ -1,0 +1,30 @@
+abilities: display the character's abilities
+add ability: add an ability to this character
+add item: add an item to character's inventory
+add proficiency: add a proficiency to this character
+add spell: add a spell to character's list of usable spells
+background info: display character personality traits, ideals, bonds, and flaws
+basic info: display player name, character name, race, class, level, background, alignment, and experience points
+exit: exit program
+help: display list of commands
+hp: update the character's current hit points
+inventory: display the character's inventory
+load: load a different existing character
+log: display all existing log entries
+new character: create a new character
+new log: add a new log entry
+proficiencies: display list of this character's proficiencies
+remove ability: remove an ability from this character
+remove item: remove an item from the character's inventory
+remove proficiency: remove a proficiency from this character
+remove spell: remove a spell from the character's list of usable spells
+reset spell slots: reset spell slot count to maximum
+roll: roll dice
+save: save any current changes made to this character
+skills: display character's skill modifiers
+spell info: display details of a given spell
+spells: display list of this character's spells and spell-related stats
+stats: display all character stats
+update info: update values of basic info, background info, and spellcasting ability
+update stats: update value of base stats and spell slot counts
+use spell: update current spell slot count to reflect use of a spell
