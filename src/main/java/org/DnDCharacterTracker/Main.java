@@ -229,7 +229,7 @@ public class Main {
 				}
 				for (String key : myCharacter.getAbilities().keySet()) {
 					System.out.print(key + ": ");
-					printWithFormat(myCharacter.getAbilities().get(key), 80, key.length() + 2);
+					FormatHandler.printWithFormat(myCharacter.getAbilities().get(key), 80, key.length() + 2);
 				}
 				break;
 				
@@ -289,13 +289,13 @@ public class Main {
 			case "backgroundinfo":
 				// Display all character background information
 				System.out.print("Personality Traits: " );
-				printWithFormat(myCharacter.getPersonalityTraits(), 80, 20);
+				FormatHandler.printWithFormat(myCharacter.getPersonalityTraits(), 80, 20);
 				System.out.print("Ideals: ");
-				printWithFormat(myCharacter.getIdeals(), 80, 8);
+				FormatHandler.printWithFormat(myCharacter.getIdeals(), 80, 8);
 				System.out.print("Bonds: ");
-				printWithFormat(myCharacter.getBonds(), 80, 7);
+				FormatHandler.printWithFormat(myCharacter.getBonds(), 80, 7);
 				System.out.print("Flaws: ");
-				printWithFormat(myCharacter.getFlaws(), 80, 7);
+				FormatHandler.printWithFormat(myCharacter.getFlaws(), 80, 7);
 				break;
 				
 			case "basicinfo":
@@ -376,7 +376,7 @@ public class Main {
 				// Print each item in the Character's inventory
 				for (String key : myCharacter.getInventory().keySet()) {
 					System.out.print(key + ": ");
-					printWithFormat(myCharacter.getInventory().get(key), 80, key.length() + 2);
+					FormatHandler.printWithFormat(myCharacter.getInventory().get(key), 80, key.length() + 2);
 				}
 				break;
 				
@@ -419,7 +419,7 @@ public class Main {
 										   + myCharacter.getName().toLowerCase().replaceAll("\\s", "") + "_log.txt");
 					Scanner logScan = new Scanner(inFile);
 					while (logScan.hasNextLine()) {
-						printWithFormat(logScan.nextLine(), 100, 0);
+						FormatHandler.printWithFormat(logScan.nextLine(), 100, 0);
 					}
 				} catch (Exception e) {
 					System.out.println("This character does not have an existing log");
@@ -677,7 +677,7 @@ public class Main {
 					System.out.println("Duration: " + sp.getDuration());
 					System.out.println("Concentration: " + sp.getConcentration());
 					System.out.print("Description: ");
-					printWithFormat(sp.getDescription(), 80, 13);
+					FormatHandler.printWithFormat(sp.getDescription(), 80, 13);
 					System.out.println("Damage: " + sp.getDamage());
 					System.out.println("Higher level casting effects: " + sp.getHigherLevelCast());
 				} catch (NullPointerException e) {
@@ -1034,27 +1034,6 @@ public class Main {
 		// return Character in case any changes have been made
 		return myCharacter;
 		
-	}
-	
-	// Function: Print a String to the terminal and insert a new line after 
-	// 			 roughly 50 characters have been printed
-	// Parameter: s - String to be printed
-	public static void printWithFormat(String s, int lineLength, int charCount) {
-		// Split the passed String by word
-		String[] temp = s.split(" ");
-		for (int i = 0; i  < temp.length; i++) {
-			// Print each word and add its length to the running count of printed characters
-			System.out.print(temp[i] + " ");
-			charCount += temp[i].length() + 1;
-			// If the last printed word surpassed (lineLength) characters on the current line,
-			// start a new line with an indent and reset the character count
-			if (charCount > lineLength && i < temp.length - 1) {
-				System.out.println();
-				System.out.print("    ");
-				charCount = 4;
-			}
-		}
-		System.out.println();
 	}
 	
 	// Function: Creates a new directory dedicated to the current Character if necessary,
