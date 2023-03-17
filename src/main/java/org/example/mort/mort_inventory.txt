@@ -1,0 +1,2 @@
+Bag of Holding
+Holds items larger than itself
