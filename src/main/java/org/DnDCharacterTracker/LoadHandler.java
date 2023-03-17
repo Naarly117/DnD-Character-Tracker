@@ -26,10 +26,11 @@ public class LoadHandler {
     public static DndCharacter loadCharacter(String name) {
         // Create DndCharacter object and load initial character data into it
         DndCharacter myCharacter = loadCharacterInitialData(name);
-        // Update myCharacter to load spells, inventory, etc.
+        // Update myCharacter to load spells, inventory, abilities, and proficiencies
         myCharacter = loadSpells(myCharacter, name);
         myCharacter = loadInventory(myCharacter, name);
         myCharacter = loadAbilities(myCharacter, name);
+        myCharacter = loadProficiencies(myCharacter, name);
         return myCharacter;
     }
 
@@ -116,7 +117,7 @@ public class LoadHandler {
         return myCharacter;
     }
 
-    // Parameters: myCharacter - DndCharacter object to load spells of
+    // Parameters: myCharacter - DndCharacter object to load inventory of
     //             name - name of the DndCharacter
     // Returns: modified myCharacter with inventory loaded
     private static DndCharacter loadInventory(DndCharacter myCharacter, String name) {
@@ -144,6 +145,9 @@ public class LoadHandler {
         return myCharacter;
     }
 
+    // Parameters: myCharacter - DndCharacter object to load abilities of
+    //             name - name of the DndCharacter
+    // Returns: modified myCharacter with abilities loaded
     private static DndCharacter loadAbilities(DndCharacter myCharacter, String name) {
         try {
             File inFile = new File(initialPath + name + "\\" + name + "_abilities.txt");
@@ -164,6 +168,22 @@ public class LoadHandler {
             }
         } catch (FileNotFoundException e) {
             // If this Character has no abilities, nothing needs to be done here
+        }
+        return myCharacter;
+    }
+
+    // Parameters: myCharacter - DndCharacter object to load proficiencies of
+    //             name - name of the DndCharacter
+    // Returns: modified myCharacter with proficiencies loaded
+    private static DndCharacter loadProficiencies(DndCharacter myCharacter, String name) {
+        try {
+            File inFile = new File(initialPath + name + "\\" + name + "_proficiencies.txt");
+            Scanner myScanner = new Scanner(inFile);
+            while (myScanner.hasNextLine()) {
+                myCharacter.addProficiency(myScanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            // If this Character has no proficiencies, nothing needs to be done here
         }
         return myCharacter;
     }

@@ -402,11 +402,11 @@ public class Main {
 				}
 				// Load new character
 				System.out.print("Enter name of new character to load: ");
-				myCharacter = loadCharacter(input.nextLine());
+				myCharacter = LoadHandler.loadCharacter(FormatHandler.normalize(input.nextLine()));
 				// Ensure that the character being loaded actually exists
 				while(myCharacter.getName().equals("")) {
 					System.out.print("Enter name of new character to load: ");
-					myCharacter = loadCharacter(input.nextLine());
+					myCharacter = LoadHandler.loadCharacter(FormatHandler.normalize(input.nextLine()));
 				}
 				System.out.println("Character successfully loaded!");
 				break;
@@ -1034,156 +1034,6 @@ public class Main {
 		// return Character in case any changes have been made
 		return myCharacter;
 		
-	}
-	
-	// Function: load an existing character from text files
-	// Parameter: name of existing character to be loaded
-	// Returns: Character object created from contents of input files
-	public static DndCharacter loadCharacter(String name) {
-		String path = "src\\main\\java\\org\\example\\";
-		name = name.toLowerCase().replaceAll("\\s", "");
-		String directory = path + name;
-		DndCharacter myCharacter = new DndCharacter();
-		
-		// Load the Character's stats and other basic info
-		try {
-			// Initialize variables
-			File inFile = new File(directory + "\\" + name + ".txt");
-			Scanner myScanner = new Scanner(inFile);
-			TreeMap<String, String> charData = new TreeMap<String, String>();
-			// Add contents of input file to charData
-			String[] temp = new String[0];
-			String s = "";
-			while (myScanner.hasNextLine()) {
-				temp = myScanner.nextLine().split(" ");
-				for (int i = 1; i < temp.length-1; i++) {
-					s += temp[i] + " ";
-				}
-				if (temp.length > 1) {
-					s += temp[temp.length-1];
-				}
-				charData.put(temp[0], s);
-				s = "";
-			}
-			// Use charData to construct new Character
-			myCharacter = new DndCharacter(charData);
-		} catch (FileNotFoundException e) {
-			System.out.println("\nCharacter does not exist");
-		}
-		
-		// Load list of character's Spells
-		try {
-			File inFile = new File(directory + "\\" + name + "_spells.txt");
-			Scanner myScanner = new Scanner(inFile);
-			ArrayList<String> spellData = new ArrayList<String>();
-			// Read the Spells text file into an ArrayList
-			while (myScanner.hasNextLine()) {
-				spellData.add(myScanner.nextLine());
-			}
-			
-			// Start a new ArrayList for the correctly parsed spell data
-			ArrayList<String> spellData2 = new ArrayList<String>();
-			// Initialize variables
-			String[] arr = new String[0];
-			String temp = "";
-			// Split each line into an Array of each individual word
-			for (int i = 0; i < spellData.size(); i++) {
-				arr = spellData.get(i).split(" ");
-				// arr[0] is the name of the field; add it to spellData2 without modification
-				spellData2.add(arr[0]);
-				// Combine all the other words back into one String and add it to spellData2
-				for (int j = 1; j < arr.length; j++) {
-					temp += arr[j];
-					if (j + 1 < arr.length) {
-						temp += " ";
-					}
-				}
-				spellData2.add(temp);
-				// Clear the String for the next iteration of the loop
-				temp = "";
-			}
-			// At this point data for ALL spells is in spellData2 and correctly parsed
-			
-			// Initialize variables to be used while iterating through spellData2
-			Map<String, String> spellMap = new TreeMap<String, String>();
-			Spell mySpell = new Spell();
-			
-			// Parse spellData2 into spellMap to create the Spell
-			for (int i = 0; i < spellData2.size(); i += 2) {
-				// For each field, put the name and description of the field into the Map
-				spellMap.put(spellData2.get(i), spellData2.get(i+1));
-				// After every 11 fields the Spell is complete, so add it to the Character's
-				// list of spells and clear spellMap to add the next Spell
-				if (i > 1 && (i + 2) % 22 == 0) {
-					mySpell=new Spell(spellMap);
-					myCharacter.addSpell(mySpell);
-					spellMap.clear();
-				}
-			}	
-		} catch (FileNotFoundException e) {
-			// If this Character does not have any Spells, nothing needs to be done here
-		}
-		
-		// Load Character's inventory
-		try {
-			File inFile = new File(directory + "\\" + name + "_inventory.txt");
-			Scanner myScanner = new Scanner(inFile);
-			String itemName = "";
-			String itemDescription = "";
-			int line = 0;
-			while(myScanner.hasNextLine()) {
-				line++;
-				if (line % 2 == 1) {
-					// Odd-numbered lines contain the item name
-					itemName = myScanner.nextLine();
-				} else {
-					// Even-numbered lines contain the item description
-					itemDescription = myScanner.nextLine();
-					// Once item name and description have been defined, add it to the inventory
-					myCharacter.addToInventory(itemName, itemDescription);
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// If this Character has no inventory, nothing needs to be done here
-		}
-		
-		
-		// Load Character's abilities
-		try {
-			File inFile = new File(directory + "\\" + name + "_abilities.txt");
-			Scanner myScanner = new Scanner(inFile);
-			String abilityName = "";
-			String abilityDescription = "";
-			int line = 0;
-			while(myScanner.hasNextLine()) {
-				line++;
-				if (line % 2 == 1) {
-					// Odd-numbered lines contain the item name
-					abilityName = myScanner.nextLine();
-				} else {
-					// Even-numbered lines contain the item description
-					abilityDescription = myScanner.nextLine();
-					// Once item name and description have been defined, add it to the inventory
-					myCharacter.addAbility(abilityName, abilityDescription);
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// If this Character has no abilities, nothing needs to be done here
-		}
-		
-		// Load Character's proficiencies
-		try {
-			File inFile = new File(directory + "\\" + name + "_proficiencies.txt");
-			Scanner myScanner = new Scanner(inFile);
-			while (myScanner.hasNextLine()) {
-				myCharacter.addProficiency(myScanner.nextLine());
-			}
-		} catch (FileNotFoundException e) {
-			// If this Character has no proficiencies, nothing needs to be done here
-		}
-		
-		// Return completed character
-		return myCharacter;
 	}
 	
 	// Function: Print a String to the terminal and insert a new line after 
