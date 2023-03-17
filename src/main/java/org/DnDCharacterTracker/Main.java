@@ -556,15 +556,7 @@ public class Main {
 					System.out.println("Error: input must be a positive number");
 				}
 				// Add up the total of all die rolls, print each individual roll, and print the total
-				int runningTotal = 0;
-				Random rand = new Random();
-				System.out.print("Rolls: ");
-				for(int i = 0; i < diceCount; i++) {
-					int x = rand.nextInt(size) + 1;
-					System.out.print(x + " ");
-					runningTotal += x;
-				}
-				System.out.println("\nTotal: " + runningTotal);
+				MathHandler.rollDice(size, diceCount);
 				break;
 				
 			case "save":
