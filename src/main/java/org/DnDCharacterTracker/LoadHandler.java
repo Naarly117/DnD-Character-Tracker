@@ -14,17 +14,23 @@ public class LoadHandler {
 
     // Returns: DndCharacter object with data loaded in from text files
     public static DndCharacter loadCharacter() {
+        // Prompt user for name of character to load
         System.out.print("Enter name of character: ");
         Scanner input = new Scanner(System.in);
         String name = FormatHandler.normalize(input.nextLine());
+        return loadCharacter(name);
+    }
 
+    // Parameter: name - name of character to load
+    // Returns: DndCharacter object with data loaded in from text files
+    public static DndCharacter loadCharacter(String name) {
         // Create DndCharacter object and load initial character data into it
         DndCharacter myCharacter = loadCharacterInitialData(name);
         // Update myCharacter to load spells, inventory, etc.
         myCharacter = loadSpells(myCharacter, name);
         myCharacter = loadInventory(myCharacter, name);
+        myCharacter = loadAbilities(myCharacter, name);
         return myCharacter;
-
     }
 
     // Parameter: name - name of the character to load from text file
@@ -110,6 +116,9 @@ public class LoadHandler {
         return myCharacter;
     }
 
+    // Parameters: myCharacter - DndCharacter object to load spells of
+    //             name - name of the DndCharacter
+    // Returns: modified myCharacter with inventory loaded
     private static DndCharacter loadInventory(DndCharacter myCharacter, String name) {
         try {
             File inFile = new File(initialPath + name + "\\" + name + "_inventory.txt");
@@ -131,6 +140,30 @@ public class LoadHandler {
             }
         } catch (FileNotFoundException e) {
             // If this Character has no inventory, nothing needs to be done here
+        }
+        return myCharacter;
+    }
+
+    private static DndCharacter loadAbilities(DndCharacter myCharacter, String name) {
+        try {
+            File inFile = new File(initialPath + name + "\\" + name + "_abilities.txt");
+            Scanner myScanner = new Scanner(inFile);
+            String abilityName = "";
+            int line = 0;
+            while(myScanner.hasNextLine()) {
+                line++;
+                if (line % 2 == 1) {
+                    // Odd-numbered lines contain the item name
+                    abilityName = myScanner.nextLine();
+                } else {
+                    // Even-numbered lines contain the item description
+                    String abilityDescription = myScanner.nextLine();
+                    // Once item name and description have been defined, add it to the inventory
+                    myCharacter.addAbility(abilityName, abilityDescription);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // If this Character has no abilities, nothing needs to be done here
         }
         return myCharacter;
     }
