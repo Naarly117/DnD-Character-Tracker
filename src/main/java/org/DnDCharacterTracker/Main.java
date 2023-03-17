@@ -1214,7 +1214,7 @@ public class Main {
 	public static void saveCharacter(DndCharacter myCharacter) {
 		
 		// Initialize variable
-		String path = "src\\main\\java\\org\\example\\";
+		String path = "src\\main\\java\\org\\DnDCharacterTracker\\";
 		String charName = myCharacter.getName().toLowerCase().replaceAll("\\s", "");
 		String directoryName = path + charName;
 		

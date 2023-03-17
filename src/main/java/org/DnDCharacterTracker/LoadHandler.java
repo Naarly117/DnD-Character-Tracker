@@ -22,6 +22,7 @@ public class LoadHandler {
         DndCharacter myCharacter = loadCharacterInitialData(name);
         // Update myCharacter to load spells, inventory, etc.
         myCharacter = loadSpells(myCharacter, name);
+        myCharacter = loadInventory(myCharacter, name);
         return myCharacter;
 
     }
@@ -47,7 +48,7 @@ public class LoadHandler {
             }
             myCharacter = new DndCharacter(charData);
         } catch (FileNotFoundException e) {
-            System.out.println("Unexpected error: loading character data");
+            System.out.println("Unexpected error: loading initial character data");
         }
         return myCharacter;
     }
@@ -105,6 +106,31 @@ public class LoadHandler {
             }
         } catch (FileNotFoundException e) {
             // If this Character does not have any Spells, nothing needs to be done here
+        }
+        return myCharacter;
+    }
+
+    private static DndCharacter loadInventory(DndCharacter myCharacter, String name) {
+        try {
+            File inFile = new File(initialPath + name + "\\" + name + "_inventory.txt");
+            Scanner myScanner = new Scanner(inFile);
+            String itemName = "";
+
+            int line = 0;
+            while(myScanner.hasNextLine()) {
+                line++;
+                if (line % 2 == 1) {
+                    // Odd-numbered lines contain the item name
+                    itemName = myScanner.nextLine();
+                } else {
+                    // Even-numbered lines contain the item description
+                    String itemDescription = myScanner.nextLine();
+                    // Once item name and description have been defined, add it to the inventory
+                    myCharacter.addToInventory(itemName, itemDescription);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // If this Character has no inventory, nothing needs to be done here
         }
         return myCharacter;
     }
