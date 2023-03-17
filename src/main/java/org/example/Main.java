@@ -63,11 +63,12 @@ public class Main {
 
 				// Load character
 				case "l" -> {
-					// Prompt user for name of character to be loaded
+				/*	// Prompt user for name of character to be loaded
 					System.out.print("Enter name of character: ");
 					s = input.nextLine();
 					// Load the character
-					myCharacter = loadCharacter(s);
+					myCharacter = loadCharacter(s); */
+					myCharacter = LoadHandler.loadCharacter();
 					if (!myCharacter.getName().equals("")) {
 						System.out.println("\nCharacter loaded successfully!");
 					}

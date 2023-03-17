@@ -1,0 +1,38 @@
+Alignment Chaotic Evil
+ArmorClass 12
+Background Criminal
+Bonds none
+Charisma 11
+Class Wizard
+Constitution 12
+CurrentHitPoints 45
+Dexterity 17
+ExperiencePoints 2
+Flaws Shifty, conniving
+Ideals $
+Initiative 2
+Inspiration 2
+Intelligence 20
+Level 4
+Lv1SpellSlots 5
+Lv2SpellSlots 4
+Lv3SpellSlots 3
+Lv4SpellSlots 2
+Lv5SpellSlots 1
+Lv6SpellSlots 0
+Lv7SpellSlots 0
+Lv8SpellSlots 0
+Lv9SpellSlots 0
+MaxHitPoints 45
+Name Mort
+PassiveWisdom(Perception) 11
+PersonalityTraits Evil, criminal
+PlayerName Josh
+ProficiencyBonus 3
+Race Goblin
+Speed 30
+SpellAttackBonus 8
+SpellSaveDC 15
+SpellcastingAbility Int
+Strength 9
+Wisdom 14
