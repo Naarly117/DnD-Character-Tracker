@@ -10,28 +10,19 @@ public class EventHandler {
     //             myCharacter - DndCharacter that the event will involve
     // Returns: myCharacter after any modification during event
     public static DndCharacter handleEvent(String event, DndCharacter myCharacter) {
-        Scanner input = new Scanner(System.in);
-        switch(event) {
-            case "addability":
-                myCharacter = addAbility(myCharacter, input);
-                break;
-            case "additem":
-                myCharacter = addItem(myCharacter, input);
-                break;
-            case "addproficiency":
-                myCharacter = addProficiency(myCharacter, input);
-                break;
-            case "addspell":
-                myCharacter = addSpell(myCharacter, input);
-                break;
+        switch (event) {
+            case "addability" -> myCharacter = addAbility(myCharacter);
+            case "additem" -> myCharacter = addItem(myCharacter);
+            case "addproficiency" -> myCharacter = addProficiency(myCharacter);
+            case "addspell" -> myCharacter = addSpell(myCharacter);
         }
         return myCharacter;
     }
 
-    // Parameters: myCharacter - DndCharacter to add an ability to
-    //             input - Scanner on system input
+    // Parameter: myCharacter - DndCharacter to add an ability to
     // Returns: myCharacter with new ability added
-    private static DndCharacter addAbility(DndCharacter myCharacter, Scanner input) {
+    private static DndCharacter addAbility(DndCharacter myCharacter) {
+        Scanner input = new Scanner(System.in);
         System.out.print("Name of new ability: ");
         String abilityName = input.nextLine();
         System.out.print("Description of new ability: ");
@@ -41,9 +32,9 @@ public class EventHandler {
     }
 
     // Parameters: myCharacter - DndCharacter to add an item to
-    //             input - Scanner on system input
     // Returns: myCharacter with new item added
-    private static DndCharacter addItem(DndCharacter myCharacter, Scanner input) {
+    private static DndCharacter addItem(DndCharacter myCharacter) {
+        Scanner input = new Scanner(System.in);
         System.out.print("Name of new item: ");
         String itemName = input.nextLine();
         System.out.print("Description of new item: ");
@@ -53,9 +44,9 @@ public class EventHandler {
     }
 
     // Parameters: myCharacter - DndCharacter to add a proficiency to
-    //             input - Scanner on system input
     // Returns: myCharacter with new proficiency added
-    private static DndCharacter addProficiency(DndCharacter myCharacter, Scanner input) {
+    private static DndCharacter addProficiency(DndCharacter myCharacter) {
+        Scanner input = new Scanner(System.in);
         System.out.print("Name of new proficiency: ");
         myCharacter.addProficiency(input.nextLine().toLowerCase());
         System.out.println("Proficiency added");
@@ -65,7 +56,8 @@ public class EventHandler {
     // Parameters: myCharacter - DndCharacter to add a spell to
     //             input - Scanner on system input
     // Returns: myCharacter with new spell added
-    private static DndCharacter addSpell(DndCharacter myCharacter, Scanner input) {
+    private static DndCharacter addSpell(DndCharacter myCharacter) {
+        Scanner input = new Scanner(System.in);
         Map<String, String> spellData = new TreeMap<>();
         System.out.print("Name of new spell: ");
         spellData.put("name", input.nextLine());
