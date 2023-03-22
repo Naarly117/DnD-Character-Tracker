@@ -1,2 +1,4 @@
 Bag of Holding
 Bag that can hold items larger than itself
+Gold gem
+A golden gem

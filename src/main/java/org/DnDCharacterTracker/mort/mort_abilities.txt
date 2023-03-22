@@ -1,2 +1,4 @@
 Dark Vision
 Can see up to 60ft away in darkness
+Pickpocket
++3 on Stealth and Sleight of Hand rolls when stealing

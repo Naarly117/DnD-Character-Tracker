@@ -227,55 +227,22 @@ public class Main {
 				
 			case "addability":
 				// Add an ability to the Character's list of abilities
-				System.out.print("Name of new ability: ");
-				String abilityName = input.nextLine();
-				System.out.print("Description of new ability: ");
-				myCharacter.addAbility(abilityName, input.nextLine());
-				System.out.println("\n" + abilityName + " added to list of abilities");
+				myCharacter = EventHandler.handleEvent(s, myCharacter);
 				break;
 				
 			case "additem":
 				// Add an item to the character's inventory
-				System.out.print("Name of new item: ");
-				String itemName = input.nextLine();
-				System.out.print("Description of new item: ");
-				myCharacter.addToInventory(itemName, input.nextLine());
-				System.out.println("\n" + itemName + " added to inventory");
+				myCharacter = EventHandler.handleEvent(s, myCharacter);
 				break;
 				
 			case "addproficiency":
 				// Add a proficiency to this Character's list of proficiencies
-				System.out.print("Name of new proficiency: ");
-				myCharacter.addProficiency(input.nextLine().toLowerCase());
-				System.out.println("Proficiency added");
+				myCharacter = EventHandler.handleEvent(s, myCharacter);
 				break;
 			
 			case "addspell":
 				// Add a spell to the list of the character's usable spells
-				Map<String, String> spellData = new TreeMap<>();
-				System.out.print("Name of new spell: ");
-				spellData.put("name", input.nextLine());
-				System.out.print("Level of new spell: ");
-				spellData.put("level", input.nextLine());
-				System.out.print("Casting time of new spell: ");
-				spellData.put("castingtime", input.nextLine());
-				System.out.print("Range of new spell: ");
-				spellData.put("range", input.nextLine());
-				System.out.print("Target of new spell: ");
-				spellData.put("target", input.nextLine());
-				System.out.print("Components of new spell: ");
-				spellData.put("components", input.nextLine());
-				System.out.print("Duration of new spell: ");
-				spellData.put("duration", input.nextLine());
-				System.out.print("Concentration? [yes/no]: ");
-				spellData.put("concentration", input.nextLine());
-				System.out.print("Description of new spell: ");
-				spellData.put("description", input.nextLine());
-				System.out.print("Damage of new spell: ");
-				spellData.put("damage", input.nextLine());
-				System.out.print("Higher level cast effects of new spell: ");
-				spellData.put("higherlevelcast", input.nextLine());
-				myCharacter.addSpell(new Spell(spellData));
+				myCharacter = EventHandler.handleEvent(s, myCharacter);
 				break;
 			
 			case "backgroundinfo":
