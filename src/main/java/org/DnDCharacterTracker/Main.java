@@ -133,17 +133,6 @@ public class Main {
 		
 	}
 	
-	// Function: Calculate the modifier for a stat
-	// Parameter: stat - value of stat to calculate a modifier for
-	// Returns: mod - value of the modifier for stat
-	/*public static int calculateModifier(int stat) {
-		if (stat > 9) {
-			return (stat-10)/2;
-		} else {
-			return (stat-11)/2;
-		}
-	}*/
-	
 	// Function: Executes a command based on user input
 	// Parameters: s - String name of command to be executed
 	//			   myCharacter - the Character that the command will be executed on
